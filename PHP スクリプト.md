@@ -29,3 +29,12 @@ END;
 同じ部分の使い回し。
 require '../header.php';
 
+# form
+<form action="user-output.php" method="post">
+
+# リクエストパラメータ
+<input type="text" name="user">
+echo 'ようこそ、', $_REQUEST['user'], 'さん。';
+
+
+

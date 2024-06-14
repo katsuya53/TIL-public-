@@ -36,5 +36,13 @@ require '../header.php';
 <input type="text" name="user">
 echo 'ようこそ、', $_REQUEST['user'], 'さん。';
 
+# チェックボックス
+<input type="checkbox" name="mail">お買い得情報のメールを受け取る
 
+# if-else文
+if (isset($_REQUEST['mail'])) {
+	echo 'メールをお送りさせて頂きます。';
+} else {
+	echo 'メールはお送りさせて頂きません。';
+}
 

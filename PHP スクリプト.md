@@ -65,3 +65,11 @@ case '中華':
 echo 'をご提供いたします。';
 ?>
 
+# セレクトボックス
+<select name="seat">
+<option value="自由席">自由席</option>
+<option value="指定席">指定席</option>
+<option value="グリーン席">グリーン席</option>
+</select>
+<p><input type="submit" value="確定"></p>
+

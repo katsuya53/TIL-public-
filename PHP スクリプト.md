@@ -73,3 +73,10 @@ echo 'をご提供いたします。';
 </select>
 <p><input type="submit" value="確定"></p>
 
+# for文
+<?php
+for ($i=0; $i<10; $i++) {
+	echo '<option value="', $i, '">', $i, '</option>';
+}
+?>
+

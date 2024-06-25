@@ -84,8 +84,75 @@ expectの引数に指定されたインスタンスが、バリデーション�
 使用方法はdescribeと同じだが、describeには何についてのテストなのかを指定するのに対し、contextには特定の条件を指定
 
 
+# コントローラーの単体テストコード
 
+## Request Spec
+RSpecが提供している、コントローラーのテストコードを書くために特化した手法です。RSpecの導入が完了していれば使用でき流。
 
+## コントローラーの単体テストコードを記述するファイルを生成
+% rails g rspec:request posts
 
+## create
+ActiveRecordのcreateメソッドと同様の意味。
+buildとほぼ同じ働きをするが、createの場合はテスト用のDBに値が保存。
+注意すべき点として、1回のテストが実行され、終了する毎にテスト用のDBの内容がロールバックされる。（保存された値がすべて消去されてしまう）
 
+## テストコードを実行
+% bundle exec rspec spec/requests/posts_spec.rb
+
+## get
+it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
+  get root_path
+  binding.pry
+end
+以下のコマンドでテストコードを実行し、binding.pryの部分で止まることを確認
+
+## response
+リクエストに対するレスポンスそのものが含まれる
+このレスポンスで取得できる情報に、想定する内容が含まれているかを確認することで、テストコードを書くことができる
+binding.pryで停止しているところに、responseと入力してエンターキーを押下
+ここから、「正常なレスポンスかどうか」を判断する必要がある。それを判断するためには、HTTPステータスコードで判別
+
+## HTTPエイチティーティーピーステータスコード
+ステータスコード	内容
+100~	処理の継続中
+200~	処理の成功
+300~	リダイレクト
+400~	クライアントのエラー
+500~	サーバーのエラー
+
+正常にレスポンスを得ることを確かめたいため、200というステータスコードを期待
+レスポンスの中からステータスコードを確かめるためには、statusを利用
+
+## status
+response.statusと実行することによって、そのレスポンスのステータスコードを出力できる
+binding.pryで停止しているところに、response.statusと入力してエンターキーを押下
+200が確認できれば成功
+
+## 完成したテストコード
+it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
+  get root_path
+  expect(response.status).to eq 200
+end
+
+## bodyボディー
+response.bodyと記述すると、ブラウザに表示されるHTMLの情報を抜き出すことができる
+
+## response.bodyに@tweet.textが含まれているかどうかを確かめる
+it 'indexアクションにリクエストするとレスポンスに投稿済みのツイートのテキストが存在する' do
+  get root_path
+  expect(response.body).to include(@tweet.text)
+end
+
+## レスポンスに投稿済みの画像URLが含まれていることを確認
+it 'indexアクションにリクエストするとレスポンスに投稿済みのツイートの画像URLが存在する' do 
+  get root_path
+  expect(response.body).to include(@tweet.image)
+end
+
+## 検索フォームの「投稿を検索する」という文言がレスポンスに含まれているかどうかを確認
+it 'indexアクションにリクエストするとレスポンスに投稿検索フォームが存在する' do 
+  get root_path
+  expect(response.body).to include('投稿を検索する')
+end
 

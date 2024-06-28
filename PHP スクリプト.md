@@ -80,3 +80,13 @@ for ($i=0; $i<10; $i++) {
 }
 ?>
 
+# foreachループ
+color=['ホワイト', 'ブルー', 'レッド', 'イエロー', 'ブラック'];
+$color=array('ホワイト', 'ブルー', 'レッド', 'イエロー', 'ブラック');
+foreach ($color as $c) {
+	echo '<option value="', $c, '">', $c, '</option>';
+-------------
+<?php
+echo '<p>商品の色は「', $_REQUEST['color'], '」</p>';
+?>
+

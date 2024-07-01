@@ -89,8 +89,10 @@ expectの引数に指定されたインスタンスが、バリデーション�
 ## Request Spec
 RSpecが提供している、コントローラーのテストコードを書くために特化した手法です。RSpecの導入が完了していれば使用でき流。
 
-## コントローラーの単体テストコードを記述するファイルを生成
+## ディレクトリ作成
 % rails g rspec:request posts
+
+# postsコントローラーindexアクションの単体テストコード
 
 ## create
 ActiveRecordのcreateメソッドと同様の意味。

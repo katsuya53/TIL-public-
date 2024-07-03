@@ -238,3 +238,28 @@ end
 
 
 ## 投稿のテストコード
+
+## have_selector
+指定したセレクタが存在するかどうかを判断するマッチャ
+投稿した画像が表示されているか確認は
+have_selector ".content_post[style='background-image: url(#{@tweet_image});']"という形で記述
+
+## テストコードを実行
+% bundle exec rspec spec/system/tweets_spec.rb
+
+## have_link
+expect('要素').to have_link 'ボタンの文字列', href: 'リンク先のパス'と記述することで、要素の中に当てはまるリンクがあることを確認
+
+## have_no_link
+expect('要素').to have_no_link 'ボタンの文字列', href: 'リンク先のパス'と記述することで、要素の中に当てはまるリンクがないことを確認
+
+## all
+all('クラス名')でpageに存在する同名のクラスを持つ要素をまとめて取得できます。そしてall('クラス名')[0]のように添字を加えることで「◯番目のmoreクラス」を取得
+
+## have_field
+have_field('tweet_image')と記述することで、「tweet_image」というidを持ったフォームが存在するかを確認
+なお、CSSにおいてidを表すために「#」が必要だが、have_fileldで引数を指定する際は不要。
+have_field('#tweet_image')ではなく、have_field('tweet_image')と記述することに注意
+また、あるフォームが存在し、そのフォームにある入力がされていることを確認するには「with」を使用し、have_field('tweet_image', with: "イメージ")のように記述
+
+

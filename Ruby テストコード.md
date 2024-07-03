@@ -158,3 +158,39 @@ it 'indexアクションにリクエストするとレスポンスに投稿検�
   expect(response.body).to include('投稿を検索する')
 end
 
+
+# 結合テスト
+
+## System Spec
+結合テストコードを記述するための仕組みのこと。大枠の記述はこれまでのRSpecと変わらない。
+System Specを記述するためには、CapybaraというGemを用いる。
+すでにデフォルトでRuby on Railsに搭載されてい流。
+
+## Capybara
+System Specを記述するために必要なGem
+gem 'capybara', '>= 2.15'
+
+## 結合テストコードを書くためのファイルを生成
+% rails g rspec:system users
+
+## visit
+visit 〇〇_pathのように記述すると、〇〇のページへ遷移することを表現。
+RequestSpecで学んだgetと似ているが、getはあくまでリクエストを送るだけのことを意味し、visitはそのページへ実際に遷移することを意味
+
+## page
+visitで訪れた先のページの見える分だけの情報が格納
+
+## have_content
+expect(page).to have_content('X')と記述すると、visitで訪れたpageの中に、Xという文字列があるかどうかを判断するマッチャ
+
+## fill_in
+fill_in 'フォームの名前', with: '入力する文字列'のように記述することで、フォームへの入力を行うことができる
+
+## find().click
+find('クリックしたい要素').clickと記述することで、実際にクリックができる
+
+## change
+expect{ 何かしらの動作 }.to change { モデル名.count }.by(1)と記述することによって、モデルのレコードの数がいくつ変動するのかを確認できる
+changeマッチャでモデルのカウントをする場合のみ、expect()ではなくexpect{}となる
+
+have_current_path

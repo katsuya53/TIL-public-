@@ -263,3 +263,9 @@ have_field('#tweet_image')ではなく、have_field('tweet_image')と記述す�
 また、あるフォームが存在し、そのフォームにある入力がされていることを確認するには「with」を使用し、have_field('tweet_image', with: "イメージ")のように記述
 
 
+## ツイート削除の結合テスト
+
+## find_link().click
+find_link('リンクの文字列', href: 'URL').clickといった形で使う。
+find().clickと似ているが、find_link().clickはa要素のみに対して用いることができる
+

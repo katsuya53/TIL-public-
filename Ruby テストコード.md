@@ -269,3 +269,9 @@ have_field('#tweet_image')ではなく、have_field('tweet_image')と記述す�
 find_link('リンクの文字列', href: 'URL').clickといった形で使う。
 find().clickと似ているが、find_link().clickはa要素のみに対して用いることができる
 
+
+# テストコードをまとめる
+サポートモジュール
+RSpecに用意されている、メソッド等をまとめる機能
+
+specディレクトリ配下にsupportディレクトリを作成し、その配下にsign_in_support.rbを作成
